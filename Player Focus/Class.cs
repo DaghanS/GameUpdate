@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Class : MonoBehaviour
+public class Class : MonoBehaviour // is monobehaviour necessary?
 {
 
     // This script is supposed to hold player class data.

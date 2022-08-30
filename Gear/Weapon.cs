@@ -18,7 +18,7 @@ public class Weapon : Gear
         damage = 40;
         attackSpeed = 1;
     }
-    public Weapon(string typinfo, float dmginfo, float asinfo) : base(int rarity,)
+    public Weapon(string typinfo, float dmginfo, float asinfo) : base()
     {
         type = typinfo;
         damage = dmginfo;

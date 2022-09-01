@@ -8,11 +8,12 @@ public class TestInventory : MonoBehaviour
 {
     public TestGear[,] inventory = new TestGear[5,5];
     public static TestInventory instance = null;
+    public int[] length;
     public void addInventory(TestGear item)
     {
         Debug.Log("WORKS");
-        int[] loc = firstEmpty();
-        inventory[loc[0], loc[1]] = item;
+        length = firstEmpty();
+        inventory[length[0], length[1]] = item;
         Debug.Log("Addition_DONE.");
     }
     public int[] firstEmpty()
@@ -47,6 +48,7 @@ public class TestInventory : MonoBehaviour
             Destroy(this.gameObject); // DESTROY
             return;
         }
+        // this part was checking for duplicate inventory objects.
 
 
         // test
@@ -56,18 +58,38 @@ public class TestInventory : MonoBehaviour
             // Scene1 has been removed
             currentName = "Replaced";
         }
-        Debug.Log("Scenes: " + currentName + ", " + next.name);
+        Debug.Log("Scenes: " + currentName + ", " + next.name);// names are a little confusing on the code, next is currentnewscene
 
         // original code
-        if (next.name == "Loadouts") // names are a little confusing on the code, next is currentnewscene
+        if (next.name == "Loadouts") 
         {
-            TestDisplay(inventory[0, 0].ic);
-           //parent = GameObject.Find("InventoryParent");  // WORKSSSSSSSSSSSSS
+            length = firstEmpty();
+            bool breaker = false;
+            for (int row = 0; row < 5; row++)
+            {
+                for (int col = 0; col < 5; col++)
+                {
+                    int[] currentloc = { row, col };
+                    if (currentloc == length)
+                    {
+                        breaker = true;
+                        break;
+                    }
+                    else
+                    {
+                        TestDisplay(inventory[row, col].icon);
+                    }
+
+                }
+                if (breaker == true) break;
+            }
+            // displaying of all objects.
         }
     }
     public void TestDisplay(Object icon)
     {
-        Instantiate(icon);
+        GameObject obj = Instantiate(icon) as GameObject;
+        obj.SetActive(true);
     }
 
     //public int[] FirstEmptyCoord() // unoptimized

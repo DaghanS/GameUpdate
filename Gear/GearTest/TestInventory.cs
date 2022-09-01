@@ -59,13 +59,17 @@ public class TestInventory : MonoBehaviour
         Debug.Log("Scenes: " + currentName + ", " + next.name);
 
         // original code
-        //if (next.name == "Loadouts") // names are a little confusing on the code, next is currentnewscene
-        //{
-        //    parent = GameObject.Find("InventoryParent");  // WORKSSSSSSSSSSSSS
-        //    InventoryLoader();
-
-        //}
+        if (next.name == "Loadouts") // names are a little confusing on the code, next is currentnewscene
+        {
+            TestDisplay(inventory[0, 0].ic);
+           //parent = GameObject.Find("InventoryParent");  // WORKSSSSSSSSSSSSS
+        }
     }
+    public void TestDisplay(Object icon)
+    {
+        Instantiate(icon);
+    }
+
     //public int[] FirstEmptyCoord() // unoptimized
     //{
     //    for (int pagei = 0; pagei < pageInfo; pagei++)
@@ -85,6 +89,4 @@ public class TestInventory : MonoBehaviour
     //    // error: inventory is full.
     //    return null;
     //}
-  
-   
 }

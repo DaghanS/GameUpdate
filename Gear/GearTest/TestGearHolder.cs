@@ -12,7 +12,7 @@ public class TestGearHolder : MonoBehaviour
     public void Start() // construction of testgear object. with randomised values later.
     {
         nameText.text = gameObject.transform.root.name; // root = first parent
-        gear = new TestGear(12, "Tester.");
+        gear = new TestGear();
         inv = GameObject.FindGameObjectWithTag("Inventory");
     }
     public void Collector()

@@ -58,38 +58,38 @@ public class TestInventory : MonoBehaviour
             // Scene1 has been removed
             currentName = "Replaced";
         }
-        Debug.Log("Scenes: " + currentName + ", " + next.name);// names are a little confusing on the code, next is currentnewscene
+        Debug.Log("Scenes: " + currentName + ", " + next.name);
 
         // original code
-        if (next.name == "Loadouts") 
+        // displaying of all objects.
+        if (next.name == "Loadouts") // names are a little confusing on the code, next is currentnewscene
         {
-            length = firstEmpty();
-            bool breaker = false;
-            for (int row = 0; row < 5; row++)
-            {
-                for (int col = 0; col < 5; col++)
-                {
-                    int[] currentloc = { row, col };
-                    if (currentloc == length)
-                    {
-                        breaker = true;
-                        break;
-                    }
-                    else
-                    {
-                        TestDisplay(inventory[row, col].icon);
-                    }
-
-                }
-                if (breaker == true) break;
-            }
-            // displaying of all objects.
+            TestDisplay();
         }
     }
-    public void TestDisplay(Object icon)
+    public void TestDisplay()
     {
-        GameObject obj = Instantiate(icon) as GameObject;
-        obj.SetActive(true);
+        length = firstEmpty();
+        bool breaker = false;
+        for (int row = 0; row < 5; row++)
+        {
+            for (int col = 0; col < 5; col++)
+            {
+                int[] currentloc = { row, col };
+                if (currentloc == length)
+                {
+                    breaker = true;
+                    break;
+                }
+                else
+                {
+                    // Instantiation.
+                    TestIcon icon = inventory[row, col].icon;
+                    icon.displayLoader();
+                }
+            }
+            if (breaker == true) break;
+        }
     }
 
     //public int[] FirstEmptyCoord() // unoptimized

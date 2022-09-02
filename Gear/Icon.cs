@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Icon
 {
+    // VERY OLD !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // information that is here will be created at the instantation of the gear.
     public Sprite icon;   // Image
     public Animator Effect;  // Adj (Removed)

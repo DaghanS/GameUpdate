@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TestIcon : MonoBehaviour
 {
-    Sprite itemIcon;    // Object Shape
-    Sprite Color;       // Rarity
-    Sprite Border;      // Type / Class
+    GameObject itemIcon;    // Object Shape
+    GameObject Color;       // Rarity
+    GameObject Border;      // Type / Class
     public TestIcon() // later on will have name, rarity as parameters to find right sprites.
     {
         // Need a data handler object with a finder script:
@@ -19,51 +19,43 @@ public class TestIcon : MonoBehaviour
 
 
     // THESE FUNCTIONS WILL BE RANDOMISED
-    public Sprite iconLoader()
+    public GameObject iconLoader()
     {
-        Sprite icon = Resources.Load<Sprite>("Prefab/Gear/katana_ICON");
+        GameObject icon = Resources.Load<GameObject>("Prefab/Gear/Katana/katana_ICON");
         return icon;
     }
-    public Sprite colorLoader()
+    public GameObject colorLoader()
     {
-        Sprite clr = Resources.Load<Sprite>("Prefab/slotColor/color_circle_TYPE_Samurai");
+        GameObject clr = Resources.Load<GameObject>("Prefab/Color/color_circle_TYPE_Samurai");
         return clr;
     }
-    public Sprite borderLoader()
+    public GameObject borderLoader()
     {
-        Sprite brdr = Resources.Load<Sprite>("Prefab/slotBorder/slot_borders_RARITY_COMMON");
+        GameObject brdr = Resources.Load<GameObject>("Prefab/Border/slot_borders_RARITY_COMMON");
         return brdr;
     }
-    // This display function has one problem that might slow me down a lot during the whole project:
-    // the problem is that I can not predetermine the size and the rotation of the objects before creating them.
-    // I have to be very precise with my art and / or correct things in code.
-    // creating prefabs of sprites as game objects might be the better way of keeping things organized and flexible. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public void displayLoader(int[] location) // will get location or parent object as location parameter.
+    // THESE FUNCTIONS WILL BE RANDOMISED
+
+    // Sprites are not matching up with the slots
+    // might need a new way to display items on slot locations, maybe changing the slots sprites
+    // ^^^^^ this solution is not the nicest ^^^^^^
+    // might deactivate slot when an item is on the slot, will make it difficult to add inventory management by swiping.
+    // propably gonna be fixed with new slot and item sprites.
+    public void displayLoader(int[] location)
     {
+        // Instantiate empty main
+        GameObject main = new GameObject("Item");
+        // Instantiate weapon prefab
+        GameObject icon = Instantiate(itemIcon, Vector3.zero, Quaternion.identity, main.transform);
+        // Instantiate color prefab
+        GameObject clrchild = Instantiate(Color, Vector3.zero, Quaternion.identity, main.transform);
         // Instantiate empty
-        GameObject main = new GameObject("item");
-        // add main icon sprite.
-        main.AddComponent<SpriteRenderer>();
-        main.GetComponent<SpriteRenderer>().sprite = itemIcon;
-        main.GetComponent<SpriteRenderer>().sortingOrder = 4;
-        // Instantiate empty
-        GameObject clrchild = new GameObject("color");
-        // add color.
-        clrchild.AddComponent<SpriteRenderer>();
-        clrchild.GetComponent<SpriteRenderer>().sprite = Color;
-        clrchild.GetComponent<SpriteRenderer>().sortingOrder = 3;
-        // Instantiate empty
-        GameObject bdrchild = new GameObject("border");
+        GameObject bdrchild = Instantiate(Border, Vector3.zero, Quaternion.identity, main.transform);
         // add border.
-        bdrchild.AddComponent<SpriteRenderer>();
-        bdrchild.GetComponent<SpriteRenderer>().sprite = Border;
-        bdrchild.GetComponent<SpriteRenderer>().sortingOrder = 4;
         // changing hierarchy.
-        clrchild.transform.SetParent(main.transform);
-        bdrchild.transform.SetParent(main.transform);
-        main.transform.position = new Vector3(0,0,0);
-        clrchild.transform.position = new Vector3(0, 0, 0);
-        bdrchild.transform.position = new Vector3(0, 0, 0);
+        icon.transform.localPosition = new Vector3(0,0,0);
+        clrchild.transform.localPosition = new Vector3(0, 0, 0);
+        bdrchild.transform.localPosition = new Vector3(0, 0, 0);
         // Creation of images DONE
 
         // Display location / parent object.
@@ -73,6 +65,6 @@ public class TestIcon : MonoBehaviour
         GameObject rowObj = GameObject.Find(rowname);
         GameObject colObj = rowObj.transform.Find(colname).gameObject;
         main.transform.SetParent(colObj.transform);
-        main.transform.localPosition = new Vector3(0, 0, 0);
+        main.transform.localPosition = Vector3.zero;
     }
 }

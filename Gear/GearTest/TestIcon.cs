@@ -38,31 +38,41 @@ public class TestIcon : MonoBehaviour
     // the problem is that I can not predetermine the size and the rotation of the objects before creating them.
     // I have to be very precise with my art and / or correct things in code.
     // creating prefabs of sprites as game objects might be the better way of keeping things organized and flexible. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public void displayLoader() // will get location or parent object as location parameter.
+    public void displayLoader(int[] location) // will get location or parent object as location parameter.
     {
         // Instantiate empty
         GameObject main = new GameObject("item");
         // add main icon sprite.
         main.AddComponent<SpriteRenderer>();
         main.GetComponent<SpriteRenderer>().sprite = itemIcon;
-        main.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        main.GetComponent<SpriteRenderer>().sortingOrder = 4;
         // Instantiate empty
         GameObject clrchild = new GameObject("color");
         // add color.
         clrchild.AddComponent<SpriteRenderer>();
         clrchild.GetComponent<SpriteRenderer>().sprite = Color;
-        clrchild.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        clrchild.GetComponent<SpriteRenderer>().sortingOrder = 3;
         // Instantiate empty
         GameObject bdrchild = new GameObject("border");
         // add border.
         bdrchild.AddComponent<SpriteRenderer>();
         bdrchild.GetComponent<SpriteRenderer>().sprite = Border;
-        bdrchild.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        bdrchild.GetComponent<SpriteRenderer>().sortingOrder = 4;
         // changing hierarchy.
         clrchild.transform.SetParent(main.transform);
         bdrchild.transform.SetParent(main.transform);
         main.transform.position = new Vector3(0,0,0);
         clrchild.transform.position = new Vector3(0, 0, 0);
         bdrchild.transform.position = new Vector3(0, 0, 0);
+        // Creation of images DONE
+
+        // Display location / parent object.
+        string rowname = "Row" + (location[0]+1);
+        string colname = "GearSlot" + (location[1] + 1);
+
+        GameObject rowObj = GameObject.Find(rowname);
+        GameObject colObj = rowObj.transform.Find(colname).gameObject;
+        main.transform.SetParent(colObj.transform);
+        main.transform.localPosition = new Vector3(0, 0, 0);
     }
 }

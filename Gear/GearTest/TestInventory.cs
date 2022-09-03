@@ -85,7 +85,7 @@ public class TestInventory : MonoBehaviour
                 {
                     // Instantiation.
                     TestIcon icon = inventory[row, col].icon;
-                    icon.displayLoader();
+                    icon.displayLoader(currentloc);
                 }
             }
             if (breaker == true) break;

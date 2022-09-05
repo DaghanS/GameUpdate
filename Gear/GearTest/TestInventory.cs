@@ -6,7 +6,12 @@ using System.Linq; // array comparison
 
 public class TestInventory : MonoBehaviour
 {
-    public TestGear[,] inventory = new TestGear[5,5];
+    // Inventory needs a slider menu or page system that will enable more items to be held
+
+    // also an inventory organizing system. 
+    // ^^^^ propably the event system ^^^^
+
+    public TestGear[,] inventory = new TestGear[5,12];
     public static TestInventory instance = null;
     public int[] length;
     public void addInventory(TestGear item)

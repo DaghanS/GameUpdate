@@ -7,6 +7,7 @@ public class TestIcon : MonoBehaviour
     GameObject itemIcon;    // Object Shape
     GameObject Color;       // Rarity
     GameObject Border;      // Type / Class
+    GameObject Menu;
     public TestIcon() // later on will have name, rarity as parameters to find right sprites.
     {
         // Need a data handler object with a finder script:
@@ -14,11 +15,11 @@ public class TestIcon : MonoBehaviour
         itemIcon = iconLoader();
         Color = colorLoader();
         Border = borderLoader();
-
+        Menu = MenuPrepare();
     }
 
 
-    // THESE FUNCTIONS WILL BE RANDOMISED
+    // THESE FUNCTIONS WILL BE RANDOMISED // these information are going to be gathered from the gear that is stored.
     public GameObject iconLoader()
     {
         GameObject icon = Resources.Load<GameObject>("Prefab/Gear/Katana/katana_ICON");
@@ -35,6 +36,13 @@ public class TestIcon : MonoBehaviour
         return brdr;
     }
     // THESE FUNCTIONS WILL BE RANDOMISED
+    public GameObject MenuPrepare()
+    {
+        GameObject clkMenu = Resources.Load<GameObject>("Prefab/Loadout/HoverMenu");
+        // need to get information from gear
+
+        return clkMenu;
+    }
 
     // Sprites are not matching up with the slots
     // might need a new way to display items on slot locations, maybe changing the slots sprites
@@ -49,13 +57,16 @@ public class TestIcon : MonoBehaviour
         GameObject icon = Instantiate(itemIcon, Vector3.zero, Quaternion.identity, main.transform);
         // Instantiate color prefab
         GameObject clrchild = Instantiate(Color, Vector3.zero, Quaternion.identity, main.transform);
-        // Instantiate empty
+        // Instantiate border prefab
         GameObject bdrchild = Instantiate(Border, Vector3.zero, Quaternion.identity, main.transform);
-        // add border.
+        // add onClick menu
+        GameObject hover = Instantiate(Menu, Vector3.zero, Quaternion.identity, main.transform);
+
         // changing hierarchy.
         icon.transform.localPosition = new Vector3(0,0,0);
         clrchild.transform.localPosition = new Vector3(0, 0, 0);
         bdrchild.transform.localPosition = new Vector3(0, 0, 0);
+        hover.transform.localPosition = new Vector3(2, -3, 0);
         // Creation of images DONE
 
         // Display location / parent object.

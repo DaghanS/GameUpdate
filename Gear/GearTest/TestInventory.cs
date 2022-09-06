@@ -81,7 +81,7 @@ public class TestInventory : MonoBehaviour
             for (int col = 0; col < 5; col++)
             {
                 int[] currentloc = { row, col };
-                if (currentloc == length)
+                if (currentloc.SequenceEqual(length))
                 {
                     breaker = true;
                     break;

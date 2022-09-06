@@ -66,7 +66,7 @@ public class TestIcon : MonoBehaviour
         icon.transform.localPosition = new Vector3(0,0,0);
         clrchild.transform.localPosition = new Vector3(0, 0, 0);
         bdrchild.transform.localPosition = new Vector3(0, 0, 0);
-        hover.transform.localPosition = new Vector3(2, -3, 0);
+        hover.transform.localPosition = new Vector3(1, -1.2f, 0);
         // Creation of images DONE
 
         // Display location / parent object.
@@ -76,6 +76,8 @@ public class TestIcon : MonoBehaviour
         GameObject rowObj = GameObject.Find(rowname);
         GameObject colObj = rowObj.transform.Find(colname).gameObject;
         main.transform.SetParent(colObj.transform);
+        // inventory management //
+        colObj.GetComponent<InventoryManager>().slotFilling(hover);
         main.transform.localPosition = Vector3.zero;
     }
 }

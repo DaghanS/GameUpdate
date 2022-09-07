@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestGear
 {
     int lvl;
-    string name;
+    public string name;
     public TestIcon icon; // Icon // is public only to display, could change some systems 
     public enum rarity
     {

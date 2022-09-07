@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TestIcon : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class TestIcon : MonoBehaviour
     GameObject Color;       // Rarity
     GameObject Border;      // Type / Class
     GameObject Menu;
+    //TestGear info;
     public TestIcon() // later on will have name, rarity as parameters to find right sprites.
     {
         // Need a data handler object with a finder script:
@@ -40,6 +42,15 @@ public class TestIcon : MonoBehaviour
     {
         GameObject clkMenu = Resources.Load<GameObject>("Prefab/Loadout/HoverMenu");
         // need to get information from gear
+        // name
+        //transform.Find(colname).gameObject;
+        //< TextMeshProUGUI >
+        //GameObject nametext = clkMenu.transform.Find("Total Name").gameObject;
+        //nametext.GetComponent<TextMeshProUGUI>().text = "Name: " + info.name;
+        // level
+        //GameObject lvltext = clkMenu.transform.Find("Level").gameObject;
+        //lvltext.GetComponent<TextMeshProUGUI>().text = "Level: " + info.level
+        // description
 
         return clkMenu;
     }

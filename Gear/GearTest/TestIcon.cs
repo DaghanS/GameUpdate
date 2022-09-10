@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class TestIcon : MonoBehaviour
+public class TestIcon
 {
-    GameObject itemIcon;    // Object Shape
-    GameObject Color;       // Rarity
-    GameObject Border;      // Type / Class
-    GameObject Menu;
+    public GameObject itemIcon;    // Object Shape
+    public GameObject Color;       // Rarity
+    public GameObject Border;      // Type / Class
+    public GameObject Menu;
     //TestGear info;
     public TestIcon() // later on will have name, rarity as parameters to find right sprites.
     {
@@ -19,6 +19,7 @@ public class TestIcon : MonoBehaviour
         Border = borderLoader();
         Menu = MenuPrepare();
     }
+
 
 
     // THESE FUNCTIONS WILL BE RANDOMISED // these information are going to be gathered from the gear that is stored.
@@ -60,35 +61,36 @@ public class TestIcon : MonoBehaviour
     // ^^^^^ this solution is not the nicest ^^^^^^
     // might deactivate slot when an item is on the slot, will make it difficult to add inventory management by swiping.
     // propably gonna be fixed with new slot and item sprites.
-    public void displayLoader(int[] location)
-    {
-        // Instantiate empty main
-        GameObject main = new GameObject("Item");
-        // Instantiate weapon prefab
-        GameObject icon = Instantiate(itemIcon, Vector3.zero, Quaternion.identity, main.transform);
-        // Instantiate color prefab
-        GameObject clrchild = Instantiate(Color, Vector3.zero, Quaternion.identity, main.transform);
-        // Instantiate border prefab
-        GameObject bdrchild = Instantiate(Border, Vector3.zero, Quaternion.identity, main.transform);
-        // add onClick menu
-        GameObject hover = Instantiate(Menu, Vector3.zero, Quaternion.identity, main.transform);
 
-        // changing hierarchy.
-        icon.transform.localPosition = new Vector3(0,0,0);
-        clrchild.transform.localPosition = new Vector3(0, 0, 0);
-        bdrchild.transform.localPosition = new Vector3(0, 0, 0);
-        hover.transform.localPosition = new Vector3(1, -1.2f, 0);
-        // Creation of images DONE
+    //public void displayLoader(int[] location)
+    //{
+    //    // Instantiate empty main
+    //    GameObject main = new GameObject("Item");
+    //    // Instantiate weapon prefab
+    //    GameObject icon = Instantiate(itemIcon, Vector3.zero, Quaternion.identity, main.transform);
+    //    // Instantiate color prefab
+    //    GameObject clrchild = Instantiate(Color, Vector3.zero, Quaternion.identity, main.transform);
+    //    // Instantiate border prefab
+    //    GameObject bdrchild = Instantiate(Border, Vector3.zero, Quaternion.identity, main.transform);
+    //    // add onClick menu
+    //    GameObject hover = Instantiate(Menu, Vector3.zero, Quaternion.identity, main.transform);
 
-        // Display location / parent object.
-        string rowname = "Row" + (location[0]+1);
-        string colname = "GearSlot" + (location[1] + 1);
+    //    // changing hierarchy.
+    //    icon.transform.localPosition = new Vector3(0,0,0);
+    //    clrchild.transform.localPosition = new Vector3(0, 0, 0);
+    //    bdrchild.transform.localPosition = new Vector3(0, 0, 0);
+    //    hover.transform.localPosition = new Vector3(1, -1.2f, 0);
+    //    // Creation of images DONE
 
-        GameObject rowObj = GameObject.Find(rowname);
-        GameObject colObj = rowObj.transform.Find(colname).gameObject;
-        main.transform.SetParent(colObj.transform);
-        // inventory management //
-        colObj.GetComponent<InventoryManager>().slotFilling(hover);
-        main.transform.localPosition = Vector3.zero;
-    }
+    //    // Display location / parent object.
+    //    string rowname = "Row" + (location[0]+1);
+    //    string colname = "GearSlot" + (location[1] + 1);
+
+    //    GameObject rowObj = GameObject.Find(rowname);
+    //    GameObject colObj = rowObj.transform.Find(colname).gameObject;
+    //    main.transform.SetParent(colObj.transform);
+    //    // inventory management //
+    //    colObj.GetComponent<InventoryManager>().slotFilling(hover);
+    //    main.transform.localPosition = Vector3.zero;
+    //}
 }

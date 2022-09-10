@@ -101,6 +101,8 @@ public class TestInventory : MonoBehaviour
     // ^^^^^ this solution is not the nicest ^^^^^^
     // might deactivate slot when an item is on the slot, will make it difficult to add inventory management by swiping.
     // propably gonna be fixed with new slot and item sprites.
+
+    // for now i can just make regular slots a little smaller to hide this.
     public void displayLoader(int[] location, TestGear info)
     {
         // Instantiate empty main

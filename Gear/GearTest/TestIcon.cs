@@ -5,31 +5,42 @@ using TMPro;
 
 public class TestIcon
 {
-    public GameObject itemIcon;    // Object Shape
-    public GameObject Color;       // Rarity
-    public GameObject Border;      // Type / Class
-    public GameObject Menu;
+    public GameObject itemIcon;     // Display Icon
+    public GameObject Color;        // Rarity
+    public GameObject Border;       // Type / Class // could change in a way that >> holds which subclass of gear (weapon, chest etc)
+    public GameObject Menu;         // item info // name, level, descriptiontext, enchantinfo
     //TestGear info;
-    public TestIcon() // later on will have name, rarity as parameters to find right sprites.
+    //public TestIcon() // later on will have name, rarity as parameters to find right sprites.
+    //{
+    //    // Need a data handler object with a finder script:
+    //    // so that it can find the icon information from documents.
+    //    itemIcon = iconLoader();
+    //    Color = colorLoader();
+    //    Border = borderLoader();
+    //    Menu = MenuPrepare();
+    //}
+    public TestIcon(string name, rarity rar, int lvl, string desc) // cant add rarity as parameter 
     {
         // Need a data handler object with a finder script:
         // so that it can find the icon information from documents.
-        itemIcon = iconLoader();
-        Color = colorLoader();
-        Border = borderLoader();
-        Menu = MenuPrepare();
+        itemIcon = iconLoader(name);        // name
+        Color = colorLoader(rar);              // rarity
+        Border = borderLoader();            // type / subclass  // not implemented properly
+        Menu = MenuPrepare(name,lvl,desc);               // name, level, description
     }
 
 
 
     // THESE FUNCTIONS WILL BE RANDOMISED // these information are going to be gathered from the gear that is stored.
-    public GameObject iconLoader()
+    public GameObject iconLoader(string name)
     {
+        // find the icon object based on name!!
         GameObject icon = Resources.Load<GameObject>("Prefab/Gear/Katana/katana_ICON");
         return icon;
     }
-    public GameObject colorLoader()
+    public GameObject colorLoader(rarity rar)
     {
+        // find correct color info from rarity data
         GameObject clr = Resources.Load<GameObject>("Prefab/Color/color_circle_TYPE_Samurai");
         return clr;
     }
@@ -39,7 +50,7 @@ public class TestIcon
         return brdr;
     }
     // THESE FUNCTIONS WILL BE RANDOMISED
-    public GameObject MenuPrepare()
+    public GameObject MenuPrepare(string name, int lvl, string desc)
     {
         GameObject clkMenu = Resources.Load<GameObject>("Prefab/Loadout/HoverMenu");
         // need to get information from gear

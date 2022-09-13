@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Loadout : MonoBehaviour
+public class Loadout
 {
-    new string name;        // to specify builds
-    Gear Gear1;             // First Slot
-    Gear Gear2;             // Second Slot
-    Gear Gear3;             // Third Slot
-    Icon ClassIcon;         // Class Slot
+    public string name;        // to specify builds
+    public Gear Gear1;             // First Slot
+    public Gear Gear2;             // Second Slot
+    public Gear Gear3;             // Third Slot
+    public Class cls;         // Class Slot
 }

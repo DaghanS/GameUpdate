@@ -69,6 +69,13 @@ public class Gear
 
     } // VERY COMPLEX RANDOMISED CONSTRUCTOR. 
 
+    public string gearType(Class cls)
+    {
+        // choose a type of gear that is compatible with current class.
+        // could be chosen elsewhere???
+        string chosen = "test";
+        return chosen;
+    }
     public rarity rarityR()
     {
         rarity ran = rarity.Common;

@@ -14,6 +14,7 @@ public class TestInventory : MonoBehaviour
     public TestGear[,] inventory = new TestGear[5,12];
     public static TestInventory instance = null;
     public int[] length;
+    public Loadout activeldt;
     public void addInventory(TestGear item)
     {
         Debug.Log("WORKS");
@@ -38,7 +39,9 @@ public class TestInventory : MonoBehaviour
     }
     private void Awake()
     {
+        // load inventory and active loadout data.
         SceneManager.activeSceneChanged += ChangedActiveScene;
+
     }
     private void ChangedActiveScene(Scene current, Scene next)
     {

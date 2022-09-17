@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Loadout
 {
@@ -10,23 +11,34 @@ public class Loadout
     public Gear Gear3;              // Third Slot
     public Class cls;               // Class Slot
 
-    public void instClass()
+    // need a constructor.
+    // need to construct loadouts as empty, and then load their information
+    // or just construct with loaded information if I can 
+
+    public Loadout()
     {
-        // instantiate class icon as head under the player object
+        name = "test";
+        Gear1 = null;
+        Gear2 = null;
+        Gear3 = null;
+        cls = null;
     }
-    public void instg1()
+
+    public void Editor(System.Object input) // this isn't really necessary right now?
     {
-        // instantiate first gear in its right place.
-        // instantiate buttons for attacking
-    }
-    public void instg2()
-    {
-        // instantiate second gear in its right place.
-        // instantiate buttons for attacking
-    }
-    public void instg3()
-    {
-        // instantiate third gear in its right place.
-        // instantiate buttons for attacking
+        Type iType = input.GetType();
+
+        if (iType == typeof(Class))
+        {
+            cls = input as Class;
+        }
+        if (iType == typeof(Gear)) // need information of which gear
+        {
+
+        }
+        if (iType == typeof(string))
+        {
+            name = input as string;
+        }
     }
 }

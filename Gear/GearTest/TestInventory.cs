@@ -72,10 +72,10 @@ public class TestInventory : MonoBehaviour
         // displaying of all objects.
         if (next.name == "Loadouts") // names are a little confusing on the code, next is currentnewscene
         {
-            TestDisplay();
+            AllDisplay();
         }
     }
-    public void TestDisplay()
+    public void AllDisplay()
     {
         length = firstEmpty();
         bool breaker = false;
@@ -120,6 +120,13 @@ public class TestInventory : MonoBehaviour
         GameObject bdrchild = Instantiate(info.icon.Border, Vector3.zero, Quaternion.identity, main.transform);
         // add onClick menu
         GameObject hover = Instantiate(info.icon.Menu, Vector3.zero, Quaternion.identity, main.transform);
+
+        // Adding components.
+        // add canvas group
+        // add a dragger
+        main.AddComponent<CanvasGroup>();
+        main.AddComponent<DragDrop>();
+
 
         // changing hierarchy.
         icon.transform.localPosition = new Vector3(0, 0, 0);

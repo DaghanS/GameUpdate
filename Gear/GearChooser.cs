@@ -17,5 +17,10 @@ public class GearChooser : MonoBehaviour, IPointerDownHandler
         // when another gear is clicked unsub from event?
 
         // or just switch this to gear objects so they can be moved into other slots? seems like a better way 
+
+        // drag drop handler needed
+        // on dragbegin: clone the gear at the same hierarchy, decrease transparency of current gear.
+        // on drag: move
+        // on dragend: if not in a correct place destroy. if is in a slot increase transparency and trigger slot fitting.
     }
 }

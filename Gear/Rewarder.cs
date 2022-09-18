@@ -20,7 +20,7 @@ public class Rewarder : MonoBehaviour
     }
     public void Update()
     {
-        if (!chosen.GetComponent<TestAI>().alive && !rewarded)
+        if ( !rewarded && chosen != null && !chosen.GetComponent<TestAI>().alive)
         {
             Reward();
             rewarded = true;
@@ -29,7 +29,8 @@ public class Rewarder : MonoBehaviour
     public void Reward()
     {
         GameObject spawn = Resources.Load<GameObject>("Prefab/Collectable");
-        Instantiate(spawn);
-        spawn.GetComponent<TestGearHolder>().gear = new TestGear();
+        GameObject spawncopy = Instantiate(spawn);
+        TestGear iteminf = new TestGear();
+        spawncopy.GetComponent<TestGearHolder>().GearSetter(iteminf);
     }
 }

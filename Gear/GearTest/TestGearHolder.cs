@@ -24,6 +24,10 @@ public class TestGearHolder : MonoBehaviour
         this.GetComponent<Animator>().Play("Collected");
 
     }
+    public void GearSetter(TestGear inp)
+    {
+        gear = inp;
+    }
     private void OnTriggerEnter2D(Collider2D player)
     {
         if (player.transform.CompareTag("Player"))

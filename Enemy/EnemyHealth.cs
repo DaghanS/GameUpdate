@@ -30,6 +30,11 @@ public class EnemyHealth : MonoBehaviour
     {
         this.GetComponent<TestAI>().alive = false; // stop Chase algorithm
         this.GetComponent<Animator>().Play("DeathProcess"); // slowly decrease transparency,
+        GameObject npc = transform.Find("NPC").gameObject;
+        if (npc.GetComponent<Rewarder>().chosen.Equals(this.gameObject))
+        {
+            npc.GetComponent<Rewarder>().chosen = null;
+        }
         // when its 0, destroy object.
     }
 }

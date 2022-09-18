@@ -15,9 +15,5 @@ public class ClassHolder : MonoBehaviour
         clsinfo = input;
     }
 
-    public void Start()
-    {
-        // on start load the information of spesific class for this object.
-        GameObject definedClass = transform.Find();
-    }
+
 }

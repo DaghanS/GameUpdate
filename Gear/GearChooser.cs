@@ -5,22 +5,17 @@ using UnityEngine.EventSystems;
 public class GearChooser : MonoBehaviour, IPointerDownHandler
 // click on one gear icon to get gear recommendations
 {
-    GameObject menu;
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("OnPointerDownGear");
+        
+        // when clicked, give a que that player should choose another gear to select for this slot.
+        // enable switching gear.
+        // give visual que
+        
+        // enable an event?
+        // when another gear is clicked unsub from event?
 
-        if (menu.activeInHierarchy) menu.SetActive(false);
-        else menu.SetActive(true);
+        // or just switch this to gear objects so they can be moved into other slots? seems like a better way 
     }
-
-    public void menuCreation()
-    {
-
-    }
-    private void Start()
-    {
-        menuCreation();   
-    }
-
 }

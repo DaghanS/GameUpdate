@@ -38,11 +38,6 @@ public class NPC_UI_Range : MonoBehaviour
     {
         return (distance <= 8);
     }
-    Transform chooseText() // later on this function will help with deciding which text to display.
-    {
-        Transform textChild = transform.Find("TextStart");
-        return textChild;
-    }
     void TransparencyControl()
     {
         Transform textCanvas = transform.Find("CanvasNPC");

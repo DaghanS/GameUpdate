@@ -9,7 +9,7 @@ public class SlotManage : MonoBehaviour, IPointerDownHandler
     GameObject menu;
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("OnPointerDown");
+        Debug.Log("OnPointerDownIvSlot");
         if (carrier)
         {
             if (menu.activeInHierarchy) menu.SetActive(false);

@@ -7,7 +7,7 @@ public class GearChooser : MonoBehaviour, IPointerDownHandler
 {
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("OnPointerDownGear");
+        Debug.Log("OnPointerDownGearSlot");
         
         // when clicked, give a que that player should choose another gear to select for this slot.
         // enable switching gear.

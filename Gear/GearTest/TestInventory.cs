@@ -124,7 +124,9 @@ public class TestInventory : MonoBehaviour
         // Adding components.
         // add canvas group
         // add a dragger
+        main.AddComponent<RectTransform>();
         main.AddComponent<CanvasGroup>();
+        main.AddComponent<BoxCollider2D>();
         main.AddComponent<DragDrop>();
 
 
@@ -141,10 +143,9 @@ public class TestInventory : MonoBehaviour
 
         GameObject rowObj = GameObject.Find(rowname);
         GameObject colObj = rowObj.transform.Find(colname).gameObject;
-        main.transform.SetParent(colObj.transform);
         // inventory management //
-        colObj.GetComponent<SlotManage>().slotFilling(hover);
-        main.transform.localPosition = Vector3.zero;
+        //colObj.GetComponent<SlotManage>().slotFilling(hover);
+        //main.transform.position = colObj.transform.position;
     }
 
     //public int[] FirstEmptyCoord() // unoptimized

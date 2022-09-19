@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Rewarder : MonoBehaviour
 {
     public GameObject chosen;
     public GameObject[] enemies;
     public bool rewarded;
+    public TextMeshProUGUI nameText;
     void Start()
     {
         rewarded = false;
@@ -24,6 +26,7 @@ public class Rewarder : MonoBehaviour
         {
             Reward();
             rewarded = true;
+            nameText.text = "Thanks for the Flesh...";
         }
     }
     public void Reward()

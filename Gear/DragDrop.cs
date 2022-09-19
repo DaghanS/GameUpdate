@@ -17,23 +17,22 @@ using UnityEngine.EventSystems;
 
 public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler {
 
-    [SerializeField] private Canvas canvas;
+
+    const float scale = 0.06107f; // is the scale of canvas. had problems with accessing canvas size because it is linked to camera
+
 
     private RectTransform rectTransform;  // if recttransform fails, we'll have to do conversions from vector 2 to vector3 which is easy but hopefully unnecessary
     private CanvasGroup canvasGroup;
-    
-
-    // CANVAS AND RECTTRANSFORM IS NOT WORKING.
-    // change accesibility of canvas and try to set again. (check first if Finding code is wrong or not)
-    // convert vector3's into 2's and else.
+    public GameObject menu;
+    public int counter;
 
 
     private void Awake() {
+        counter = 0;
+        menu = transform.Find("HoverMenu(Clone)").gameObject;
         rectTransform = GetComponent<RectTransform>();
-        canvasGroup = GetComponent<CanvasGroup>();
-        canvas = transform.Find("BG_Canvas").GetComponent<Canvas>();
+        GameObject canvasobj = GameObject.Find("BG_Canvas");
     }
-
     public void OnBeginDrag(PointerEventData eventData) {
         Debug.Log("OnBeginDrag");
         canvasGroup.alpha = .6f;
@@ -42,7 +41,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnDrag(PointerEventData eventData) {
         //Debug.Log("OnDrag");
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        rectTransform.anchoredPosition += eventData.delta * scale;
     }
 
     public void OnEndDrag(PointerEventData eventData) {
@@ -52,7 +51,19 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     }
 
     public void OnPointerDown(PointerEventData eventData) {
-        Debug.Log("OnPointerDown");
+        Debug.Log("OnPointerDownONGEAR");
+
+        if (counter == 1)
+        {
+            if (menu.activeInHierarchy) menu.SetActive(false);
+            else menu.SetActive(true);
+            counter = 0;
+        }
+        else
+        {
+            counter++;
+            menu.SetActive(false);
+        }
     }
 
 }

@@ -124,9 +124,9 @@ public class TestInventory : MonoBehaviour
         // Adding components.
         // add canvas group
         // add a dragger
-        main.AddComponent<RectTransform>();
+        main.AddComponent<Transform>();
         main.AddComponent<CanvasGroup>();
-        main.AddComponent<BoxCollider2D>();
+        main.AddComponent<CircleCollider2D>();
         main.AddComponent<DragDrop>();
 
 

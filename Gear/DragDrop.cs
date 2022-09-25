@@ -21,7 +21,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     const float scale = 0.06107f; // is the scale of canvas. had problems with accessing canvas size because it is linked to camera
 
 
-    private RectTransform rectTransform;  // if recttransform fails, we'll have to do conversions from vector 2 to vector3 which is easy but hopefully unnecessary
+    private Transform tf;  // if recttransform fails, we'll have to do conversions from vector 2 to vector3 which is easy but hopefully unnecessary
     private CanvasGroup canvasGroup;
     public GameObject menu;
     public int counter;
@@ -30,26 +30,28 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private void Awake() {
         counter = 0;
         menu = transform.Find("HoverMenu(Clone)").gameObject;
-        rectTransform = GetComponent<RectTransform>();
+        tf = GetComponent<Transform>();
         GameObject canvasobj = GameObject.Find("BG_Canvas");
     }
     public void OnBeginDrag(PointerEventData eventData) {
         Debug.Log("OnBeginDrag");
         canvasGroup.alpha = .6f;
         canvasGroup.blocksRaycasts = false;
+        // save current location (may not be needed)
+        // save current slot, object will return to slots center if not inserted.
     }
-
-    public void OnDrag(PointerEventData eventData) {
-        //Debug.Log("OnDrag");
-        rectTransform.anchoredPosition += eventData.delta * scale;
-    }
-
-    public void OnEndDrag(PointerEventData eventData) {
+    public void OnEndDrag(PointerEventData eventData)
+    {
         Debug.Log("OnEndDrag");
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
+        // if not inserted into another inv slot
+        // return back to start location (pinned into slot location)
     }
-
+    public void OnDrag(PointerEventData eventData) {
+        Debug.Log("OnDrag");
+        tf.position = eventData.pointerCurrentRaycast.worldPosition;
+    }
     public void OnPointerDown(PointerEventData eventData) {
         Debug.Log("OnPointerDownONGEAR");
 

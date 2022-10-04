@@ -21,51 +21,44 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     const float scale = 0.06107f; // is the scale of canvas. had problems with accessing canvas size because it is linked to camera
 
 
-    private Transform tf;  // if recttransform fails, we'll have to do conversions from vector 2 to vector3 which is easy but hopefully unnecessary
-    private CanvasGroup canvasGroup;
+    public Transform tf;
+    public CanvasGroup cg;
+    public CircleCollider2D col;
     public GameObject menu;
-    public int counter;
-
-
-    private void Awake() {
-        counter = 0;
-        menu = transform.Find("HoverMenu(Clone)").gameObject;
-        tf = GetComponent<Transform>();
-        GameObject canvasobj = GameObject.Find("BG_Canvas");
+    public void Awake()
+    {
+        tf = this.transform;
+        cg = this.GetComponent<CanvasGroup>();
+        col = this.GetComponent<CircleCollider2D>();
+        //menu = transform.Find("HoverMenu(Clone)").gameObject;
     }
+    
     public void OnBeginDrag(PointerEventData eventData) {
         Debug.Log("OnBeginDrag");
-        canvasGroup.alpha = .6f;
-        canvasGroup.blocksRaycasts = false;
+        // transparency settings!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        cg.blocksRaycasts = false;
+        col.enabled = false; // without this colider adjustment, onDrop does not trigger.
+        menu.SetActive(false);  // menu should be deactivated while dragging, no conditions.
         // save current location (may not be needed)
         // save current slot, object will return to slots center if not inserted.
     }
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("OnEndDrag");
-        canvasGroup.alpha = 1f;
-        canvasGroup.blocksRaycasts = true;
+        // use sprite renderer to affect transparency
+        col.enabled = true; // without this colider adjustment, onDrop does not trigger.
+        cg.alpha = 1f;
+        cg.blocksRaycasts = true;
         // if not inserted into another inv slot
         // return back to start location (pinned into slot location)
     }
     public void OnDrag(PointerEventData eventData) {
-        Debug.Log("OnDrag");
         tf.position = eventData.pointerCurrentRaycast.worldPosition;
     }
-    public void OnPointerDown(PointerEventData eventData) {
+    public void OnPointerDown(PointerEventData eventData) {  
         Debug.Log("OnPointerDownONGEAR");
-
-        if (counter == 1)
-        {
-            if (menu.activeInHierarchy) menu.SetActive(false);
-            else menu.SetActive(true);
-            counter = 0;
-        }
-        else
-        {
-            counter++;
-            menu.SetActive(false);
-        }
+        if (menu.activeInHierarchy) menu.SetActive(false);
+        else menu.SetActive(true);
     }
 
 }

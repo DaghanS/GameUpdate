@@ -128,7 +128,8 @@ public class TestInventory : MonoBehaviour
         main.AddComponent<CanvasGroup>();
         main.AddComponent<CircleCollider2D>();
         main.AddComponent<DragDrop>();
-
+        main.AddComponent<SpriteRenderer>();
+        main.GetComponent<SpriteRenderer>().sortingOrder = 15; // to keep item interactable after insertion.
 
         // changing hierarchy.
         icon.transform.localPosition = new Vector3(0, 0, 0);
@@ -144,27 +145,7 @@ public class TestInventory : MonoBehaviour
         GameObject rowObj = GameObject.Find(rowname);
         GameObject colObj = rowObj.transform.Find(colname).gameObject;
         // inventory management //
-        //colObj.GetComponent<SlotManage>().slotFilling(hover);
-        //main.transform.position = colObj.transform.position;
+        colObj.GetComponent<SlotManage>().slotFilling(hover);
+        main.transform.position = colObj.transform.position;
     }
-
-    //public int[] FirstEmptyCoord() // unoptimized
-    //{
-    //    for (int pagei = 0; pagei < pageInfo; pagei++)
-    //    {
-    //        for (int rowi = 0; rowi < rowAmount; rowi++)
-    //        {
-    //            for (int coli = 0; coli < colAmount; coli++)
-    //            {
-    //                if (InventoryArray[pagei, rowi, coli] == null)
-    //                {
-    //                    int[] cords = { pagei, rowi, coli };
-    //                    return cords;
-    //                }
-    //            }
-    //        }
-    //    }
-    //    // error: inventory is full.
-    //    return null;
-    //}
 }

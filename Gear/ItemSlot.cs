@@ -16,24 +16,40 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class ItemSlot : MonoBehaviour, IDropHandler {
+    Transform drag;
+    Transform parSlot;
     public void OnDrop(PointerEventData eventData) {
         Debug.Log("OnDrop");
-        Transform drag = eventData.pointerDrag.transform;
+         drag = eventData.pointerDrag.transform;
+         parSlot = drag.parent;
         if (eventData.pointerDrag != null)
         {
-            if (this.transform.childCount == 0)
+            if (ifParentInv(parSlot)) // if inv to inv (change location if 0 child //// swap locations of 2 gears if 1 child.)
             {
-                drag.SetParent(this.transform); // if slots empty, you can put it there.
-                drag.position = GetComponent<Transform>().position;
+                if (this.transform.childCount == 0)
+                {
+                    drag.SetParent(this.transform); // if slots empty, you can put it there.
+                    drag.position = GetComponent<Transform>().position;
+                    // location in inventory fix !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                }
+                else
+                {
+                    this.transform.GetChild(0).position = parSlot.position;
+                    this.transform.GetChild(0).SetParent(parSlot);
+                    drag.SetParent(this.transform);
+                    drag.position = this.transform.position;
+                }
             }
-            else
+            else // if gear to inv = destroy gear.
             {
-                Transform prevParent = drag.parent;
-                this.transform.GetChild(0).position = prevParent.position;
-                this.transform.GetChild(0).SetParent(prevParent);
-                drag.SetParent(this.transform);
-                drag.position = this.transform.position;
+                Destroy(drag.gameObject);
             }
         }
+    }
+    public bool ifParentInv(Transform par)
+    {
+        Component bin = par.GetComponent<ItemSlot>();
+        if(bin != null) return true;
+        return false;
     }
 }

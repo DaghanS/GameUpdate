@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 public class GearChooser : MonoBehaviour, IPointerDownHandler, IDropHandler
 // click on one gear icon to get gear recommendations
 {
+    Transform drag;
+    Transform parSlot;
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("OnPointerDownGearSlot");
@@ -26,21 +28,33 @@ public class GearChooser : MonoBehaviour, IPointerDownHandler, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop");
-        Transform drag = eventData.pointerDrag.transform;
+        drag = eventData.pointerDrag.transform;
         if (eventData.pointerDrag != null)
         {
-            if (this.transform.childCount == 0)
+            if (ifParentInv(parSlot)) // inv to gear
             {
-                drag.SetParent(this.transform); // if slots empty, you can put it there.
-                drag.position = GetComponent<Transform>().position;
+                if (this.transform.childCount == 0) 
+                {
+                    GameObject oldChild = this.transform.GetChild(0).gameObject;
+                    Destroy(oldChild);
+                    Transform dragCopy = Instantiate(drag, this.transform);
+                    dragCopy.position = this.transform.position;
+                }
+                else
+                {
+                    
+                }
             }
-            else
+            else // gear to gear
             {
-                GameObject oldChild = this.transform.GetChild(0).gameObject;
-                Destroy(oldChild);
-                Transform dragCopy = Instantiate(drag, this.transform);
-                dragCopy.position = this.transform.position;
+                // swap if 0 or 1 child
             }
         }
+    }
+    public bool ifParentInv(Transform par)
+    {
+        Component bin = par.GetComponent<ItemSlot>();
+        if (bin != null) return true;
+        return false;
     }
 }

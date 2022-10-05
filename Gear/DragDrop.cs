@@ -25,16 +25,18 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     public CanvasGroup cg;
     public CircleCollider2D col;
     public GameObject menu;
+    public Vector2 startPos;
     public void Awake()
     {
         tf = this.transform;
         cg = this.GetComponent<CanvasGroup>();
         col = this.GetComponent<CircleCollider2D>();
-        //menu = transform.Find("HoverMenu(Clone)").gameObject;
+        menu = transform.Find("HoverMenu(Clone)").gameObject;
     }
     
     public void OnBeginDrag(PointerEventData eventData) {
         Debug.Log("OnBeginDrag");
+        startPos = transform.position;
         // transparency settings!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         cg.blocksRaycasts = false;
         col.enabled = false; // without this colider adjustment, onDrop does not trigger.
@@ -60,5 +62,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         if (menu.activeInHierarchy) menu.SetActive(false);
         else menu.SetActive(true);
     }
-
+    public void returnLoc()
+    {
+        this.transform.position = startPos;
+    }
 }

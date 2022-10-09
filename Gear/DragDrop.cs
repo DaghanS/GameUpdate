@@ -52,7 +52,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         cg.alpha = 1f;
         cg.blocksRaycasts = true;
         // if not inserted into another inv slot
-        // return back to start location (pinned into slot location)
+        // return back to start location (pinned into slot location) // only if item is not inserted to any slots.
+        // cannot use remove parent method.
     }
     public void OnDrag(PointerEventData eventData) {
         tf.position = eventData.pointerCurrentRaycast.worldPosition;

@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 public class GearChooser : MonoBehaviour, IPointerDownHandler, IDropHandler
 // click on one gear icon to get gear recommendations
 {
+    // I
     Transform drag;
     Transform parSlot;
     public void OnPointerDown(PointerEventData eventData)
@@ -25,36 +26,61 @@ public class GearChooser : MonoBehaviour, IPointerDownHandler, IDropHandler
         // on drag: move
         // on dragend: if not in a correct place destroy. if is in a slot increase transparency and trigger slot fitting.
     }
-    public void OnDrop(PointerEventData eventData)
+    public void OnDrop(PointerEventData eventData) // VERY UNOPTIMIZED
     {
         Debug.Log("OnDrop");
         drag = eventData.pointerDrag.transform;
         if (eventData.pointerDrag != null)
         {
-            if (ifParentInv(parSlot)) // inv to gear
+            
+            if (ifParentInv(parSlot)) // inv to gear  // insert inventory item to gear. 
             {
                 if (this.transform.childCount == 0) 
+                {
+                    Transform dragCopy = Instantiate(drag, this.transform);
+                    dragCopy.position = this.transform.position;
+                    // return drag back to its slots position.
+                    drag.position = drag.parent.position;
+                }
+                else
                 {
                     GameObject oldChild = this.transform.GetChild(0).gameObject;
                     Destroy(oldChild);
                     Transform dragCopy = Instantiate(drag, this.transform);
                     dragCopy.position = this.transform.position;
-                }
-                else
-                {
-                    
+                    // return drag back to its slots position.
+                    drag.position = drag.parent.position;
                 }
             }
-            else // gear to gear
+            else // gear to gear 
             {
-                // swap if 0 or 1 child
+                if(this.transform.childCount == 0) // 0
+                {
+                    drag.SetParent(this.transform); // if slots empty, you can put it there.
+                    drag.position = GetComponent<Transform>().position;
+                    // location in inventory fix !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                }
+                else // 1
+                {
+                    Transform thisChild = this.transform.GetChild(0);
+                    thisChild.position = parSlot.position;
+                    thisChild.SetParent(parSlot);
+                    drag.SetParent(this.transform); // if slots empty, you can put it there.
+                    drag.position = GetComponent<Transform>().position;
+                }
             }
         }
     }
-    public bool ifParentInv(Transform par)
+    public bool ifParentInv(Transform par) // returns true if dragged obj has an itemslot parent.
     {
-        Component bin = par.GetComponent<ItemSlot>();
-        if (bin != null) return true;
-        return false;
+        try
+        {
+            Component bin = par.GetComponent<ItemSlot>(); // error here cancels everything
+        }
+        catch (UnityException e)
+        {
+            return false; // expected NullReferenceException
+        }
+        return true; // if bin != null return true.
     }
 }

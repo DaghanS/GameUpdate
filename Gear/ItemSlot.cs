@@ -24,7 +24,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler {
          parSlot = drag.parent;
         if (eventData.pointerDrag != null)
         {
-            if (ifParentInv(parSlot)) // if inv to inv (change location if 0 child //// swap locations of 2 gears if 1 child.)
+            if (ifParentInv(parSlot)) // if inv to inv (change location if 0 child //// swap locations of 2 gears if 1 child.) // switch item locations.
             {
                 if (this.transform.childCount == 0)
                 {
@@ -40,7 +40,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler {
                     drag.position = this.transform.position;
                 }
             }
-            else // if gear to inv = destroy gear.
+            else // if gear to inv = destroy gear. // empty the gear slot.
             {
                 Destroy(drag.gameObject);
             }
@@ -48,8 +48,14 @@ public class ItemSlot : MonoBehaviour, IDropHandler {
     }
     public bool ifParentInv(Transform par)
     {
-        Component bin = par.GetComponent<ItemSlot>();
-        if(bin != null) return true;
-        return false;
+        try
+        {
+            Component bin = par.GetComponent<ItemSlot>(); // error here cancels everything
+        }
+        catch (UnityException e)
+        {
+            return false; // expected NullReferenceException
+        }
+        return true; // if bin != null return true.
     }
 }

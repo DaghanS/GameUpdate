@@ -144,8 +144,10 @@ public class TestInventory : MonoBehaviour
 
         GameObject rowObj = GameObject.Find(rowname);
         GameObject colObj = rowObj.transform.Find(colname).gameObject;
+        main.transform.SetParent(colObj.transform);
+
         // inventory management //
-        colObj.GetComponent<SlotManage>().slotFilling(hover);
+        // colObj.GetComponent<SlotManage>().slotFilling(hover); // I dont even know what this is.
         main.transform.position = colObj.transform.position;
     }
 }

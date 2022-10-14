@@ -12,6 +12,6 @@ public class LoadoutSpawnerTest : MonoBehaviour
     public void Reward()
     {
         TestGear iteminf = new TestGear();
-        Inventory.GetComponent<TestInventory>().addInventory(iteminf);
+        Inventory.GetComponent<InventoryManager>().addInventory(iteminf);
     }
 }
